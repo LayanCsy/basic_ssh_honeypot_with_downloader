@@ -18,7 +18,7 @@ REDIS_PORT=os.environ.get("REDIS_PORT")
 REDIS_PASSWORD=os.environ.get("REDIS_PASSWORD")
 r = redis.StrictRedis(host=REDIS_HOST, port=REDIS_PORT, password=REDIS_PASSWORD, decode_responses=True)
 
-HOST_KEY = paramiko.RSAKey(filename='server.key')
+HOST_KEY = paramiko.RSAKey(filename='/usr/src/app/server.key')
 SSH_BANNER = "SSH-2.0-OpenSSH_8.2p1 Ubuntu-4ubuntu0.1"
 
 UP_KEY = '\x1b[A'.encode()
