@@ -11,7 +11,7 @@ import paramiko
 import redis
 from datetime import datetime
 from binascii import hexlify
-from paramiko.py3compat import b, u, decodebytes
+from base64 import decodebytes
 
 REDIS_HOST=os.environ.get("REDIS_HOST")
 REDIS_PORT=os.environ.get("REDIS_PORT")
@@ -98,7 +98,7 @@ class BasicSshHoneypot(paramiko.ServerInterface):
         return "publickey,password"
 
     def check_auth_publickey(self, username, key):
-        fingerprint = u(hexlify(key.get_fingerprint()))
+        fingerprint = hexlify(key.get_fingerprint()).decode("utf-8")
         logging.info('client public key ({}): username: {}, key name: {}, md5 fingerprint: {}, base64: {}, bits: {}'.format(
                     self.client_ip, username, key.get_name(), fingerprint, key.get_base64(), key.get_bits()))
         return paramiko.AUTH_PARTIALLY_SUCCESSFUL        
