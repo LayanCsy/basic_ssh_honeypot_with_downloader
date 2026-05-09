@@ -10,6 +10,7 @@ ENV PYTHONUNBUFFERED 1
 RUN pip3 install --upgrade pip
 COPY ./requirements.txt .
 RUN pip3 install -r requirements.txt
+RUN chmod +x wait-for-it.sh
 COPY . .
 RUN ssh-keygen -t rsa -b 2048 -f server.key -N ""
 
